@@ -22,14 +22,14 @@ public class Musique
         this.setImageMusique(imageMusique);
         this.setLienMusique(lienMusique);
     }
-    public Musique(int idUtilisateur, int idCategorieMusique, String titreMusique, String artisteMusique, String imageMusique, String lienMusique)
+    public Musique(int idUtilisateur, int idCategorieMusique, String titreMusique, String artisteMusique, String imageMusique, String lienMusique,boolean t)
     {
         this.setIdUtilisateur(idUtilisateur);
         this.setIdCategorieMusique(idCategorieMusique);
         this.setTitreMusique(titreMusique);
         this.setArtisteMusique(artisteMusique);
         this.setImageMusique(imageMusique);
-        this.setLienMusique(lienMusique);
+        this.setNouveauLienMusique(lienMusique,t);
     }
     
     // Getters
@@ -98,8 +98,13 @@ public class Musique
     {
         this.imageMusique = imageMusique;
     }
-
+    
     public void setLienMusique(String lienMusique)
+    {
+        this.lienMusique = lienMusique;
+    }
+    
+    public void setNouveauLienMusique(String lienMusique,boolean t)
     {
         this.lienMusique = "http://docs.google.com/uc?export=open&id="+lienMusique;
     }

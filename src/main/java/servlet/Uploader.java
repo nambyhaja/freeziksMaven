@@ -93,7 +93,7 @@ public class Uploader extends HttpServlet
                     }
                 }
             }
-            Musique musique = new Musique(idUtilisateur, idCategorieMusique, titreMusique, artisteMusique, imageMusique, lienId);
+            Musique musique = new Musique(idUtilisateur, idCategorieMusique, titreMusique, artisteMusique, imageMusique, lienId,true);
             Operations.insererMusique(musique);
         } 
         catch (FileUploadException ex) 
