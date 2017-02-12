@@ -38,21 +38,11 @@ public class Uploader extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {        
-        String secretPath = getServletContext().getRealPath("/")+File.separator+"client_secret.json";
-        String storePath = getServletContext().getRealPath("/")+File.separator+"store";
+        String secretPath = getServletContext().getRealPath("/")+"client_secret.json";
+        String storePath = getServletContext().getRealPath("/")+"store";
         String tempPath = getServletContext().getRealPath("/")+"store";
         
-        String path = getServletContext().getRealPath("/");
-        String t="";
-        String[] dir = new java.io.File(path).list();
- 
-        for (int i=0; i<dir.length; i++)
-        {
-            t=t+dir[i]+"/";
-        }
-        response.getWriter().write(secretPath+" - "+storePath);
-        
-        /*int idUtilisateur = -1;
+        int idUtilisateur = -1;
         int idCategorieMusique = -1;
         String titreMusique = "";
         String artisteMusique = "";
@@ -111,7 +101,7 @@ public class Uploader extends HttpServlet
             Logger.getLogger(Uploader.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(Uploader.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
         
     }
 }
