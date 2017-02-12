@@ -101,7 +101,7 @@ public class Musique
 
     public void setLienMusique(String lienMusique)
     {
-        this.lienMusique = lienMusique;
+        this.lienMusique = "http://docs.google.com/uc?export=open&id="+lienMusique;
     }
     
 }
