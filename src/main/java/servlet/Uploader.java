@@ -50,7 +50,7 @@ public class Uploader extends HttpServlet
         {
             t=t+dir[i]+"/";
         }
-        response.getWriter().write(t);
+        response.getWriter().write(secretPath+" - "+storePath);
         
         /*int idUtilisateur = -1;
         int idCategorieMusique = -1;
