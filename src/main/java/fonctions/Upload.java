@@ -67,6 +67,7 @@ public class Upload
     public static Credential authorize(String secretPath,String storePath) throws IOException 
     {
         java.io.File DATA_STORE_DIR = new java.io.File(storePath);
+        
         DATA_STORE_FACTORY = new FileDataStoreFactory(DATA_STORE_DIR);
         // Load client secrets.
         InputStream in = new FileInputStream(secretPath); 
@@ -82,8 +83,7 @@ public class Upload
                 .build();
         Credential credential = new AuthorizationCodeInstalledApp(
             flow, new LocalServerReceiver()).authorize("user");
-        System.out.println(
-                "Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
+        
         return credential;
     }
 
@@ -93,6 +93,7 @@ public class Upload
      * @throws IOException
      */
     public static Drive getDriveService(String secretPath,String storePath) throws IOException {
+        
         Credential credential = authorize(secretPath,storePath);
         return new Drive.Builder(
                 HTTP_TRANSPORT, JSON_FACTORY, credential)

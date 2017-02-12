@@ -366,7 +366,7 @@
                         processData: false,
                         success: function (returndata)
                         {                
-                            alert("Zik uploadé avec succes");
+                            alert(returndata);
                             window.location.href = "profile.jsp";
                         }
                     });                   

@@ -42,7 +42,9 @@ public class Uploader extends HttpServlet
         String storePath = getServletContext().getRealPath("/")+"store";
         String tempPath = getServletContext().getRealPath("/")+"store";
         
-        int idUtilisateur = -1;
+        response.getWriter().write(request.getContextPath());
+        
+        /*int idUtilisateur = -1;
         int idCategorieMusique = -1;
         String titreMusique = "";
         String artisteMusique = "";
@@ -101,7 +103,7 @@ public class Uploader extends HttpServlet
             Logger.getLogger(Uploader.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(Uploader.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
         
     }
 }
