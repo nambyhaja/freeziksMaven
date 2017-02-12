@@ -38,8 +38,8 @@ public class Uploader extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {        
-        String secretPath = getServletContext().getRealPath("/")+"client_secret.json";
-        String storePath = getServletContext().getRealPath("/")+"store";
+        String secretPath = getServletContext().getRealPath("/")+File.separator+"client_secret.json";
+        String storePath = getServletContext().getRealPath("/")+File.separator+"store";
         String tempPath = getServletContext().getRealPath("/")+"store";
         
         String path = getServletContext().getRealPath("/");
