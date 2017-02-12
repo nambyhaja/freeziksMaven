@@ -41,6 +41,7 @@ public class GetMusique extends HttpServlet
             
             Gson json = new Gson();
             String ziks = json.toJson(musiques);
+            System.out.println(ziks);
             response.setContentType("application/json");
             response.getWriter().write(ziks);
         } 

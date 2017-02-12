@@ -58,6 +58,7 @@ public class Operations
             musiques[i] = new Musique(rs.getInt("idmusique"), rs.getInt("idutilisateur"), 
                     rs.getInt("idcategoriemusique"), rs.getString("titremusique"), 
                     rs.getString("artistemusique"), rs.getString("imagemusique"), rs.getString("lienmusique"));
+            i++;
         }
         c.close();
         return musiques;
