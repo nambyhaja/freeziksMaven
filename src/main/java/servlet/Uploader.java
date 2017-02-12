@@ -42,7 +42,15 @@ public class Uploader extends HttpServlet
         String storePath = getServletContext().getRealPath("/")+"store";
         String tempPath = getServletContext().getRealPath("/")+"store";
         
-        response.getWriter().write(getServletContext().getRealPath("/"));
+        String path = getServletContext().getRealPath("/");
+        String t="";
+        String[] dir = new java.io.File(path).list();
+ 
+        for (int i=0; i<dir.length; i++)
+        {
+            t=t+dir[i]+"/";
+        }
+        response.getWriter().write(t);
         
         /*int idUtilisateur = -1;
         int idCategorieMusique = -1;
