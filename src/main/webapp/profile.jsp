@@ -363,10 +363,18 @@
                         cache: false,
                         contentType: false,
                         processData: false,
+                        dataType: 'text',
                         success: function (returndata)
-                        {                
-                            alert("Zik uploadé avec succes");
-                            window.location.href = "profile.jsp";
+                        {
+                            if(returndata=='True')
+                            {
+                                alert("Zik uploadé avec succes");
+                                window.location.href = "profile.jsp";
+                            }
+                            else
+                            {
+                                alert(returndata);
+                            }
                         }
                     });                   
                     return false;

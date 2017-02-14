@@ -212,5 +212,19 @@ public class Fonction
         return t.substring(0, 5);
     }
     
+    public static void estVide(String str,String erreur) throws Exception
+    {
+        if(str.isEmpty())
+        {
+            throw new Exception(erreur);
+        }
+    }
     
+    public static void finiPar(String str,String end) throws Exception
+    {
+        if(!str.endsWith(end))
+        {
+            throw new Exception("Veuillez uploader un fichier "+end);
+        }
+    }
 }

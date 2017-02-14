@@ -1,5 +1,6 @@
 package servlet;
 
+import fonctions.Fonction;
 import fonctions.Upload;
 import java.io.File;
 import java.io.IOException;
@@ -70,10 +71,12 @@ public class Uploader extends HttpServlet
                         else if(item.getFieldName().equals("nomZik"))
                         {
                             titreMusique = item.getString();
+                            Fonction.estVide(titreMusique, "Nom du zik est vide");
                         }
                         else if(item.getFieldName().equals("auteur"))
                         {
                             artisteMusique = item.getString();
+                            Fonction.estVide(artisteMusique, "Nom de l'auteur est vide");
                         }
                         else if(item.getFieldName().equals("categorie"))
                         {
@@ -83,24 +86,28 @@ public class Uploader extends HttpServlet
                     else
                     {
                         String fileName = new File(item.getName()).getName();
+                        Fonction.finiPar(fileName, ".mp3");
                         String filePath = storePath + File.separator + fileName;
                         File f = new File(filePath);
                         item.write(f);
-                        
+
                         lienId = Upload.doUpload(secretPath, storePath, filePath, fileName);
                         f.delete();
-                         
+                        
                     }
                 }
             }
             Musique musique = new Musique(idUtilisateur, idCategorieMusique, titreMusique, artisteMusique, imageMusique, lienId,true);
             Operations.insererMusique(musique);
+            response.getWriter().write("True");
         } 
         catch (FileUploadException ex) 
         {
             Logger.getLogger(Uploader.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(Uploader.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        catch (Exception ex) 
+        {
+            response.getWriter().write(ex.getMessage());
         }
         
     }
