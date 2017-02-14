@@ -62,13 +62,14 @@ public class Operations
         Connection c = UtilDB.getPostgresConnection();
         try
         {
-            String req="insert into utilisateur (nomutilisateur,prenomsutilisateur,datenaissance,email,motdepasse) values(?,?,?,?,?);";
+            String req="insert into utilisateur (nomutilisateur,prenomsutilisateur,datenaissance,email,motdepasse,descriptionutilisateur) values(?,?,?,?,?,?);";
             stmt=c  .prepareStatement(req,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
             stmt.setString(1,utilisateur.getNomUtilisateur());
             stmt.setString(2,utilisateur.getPrenomsUtilisateur());
             stmt.setDate(3,utilisateur.getDateNaissance());
             stmt.setString(4,utilisateur.getEmail());
             stmt.setString(5,utilisateur.getMotdepasse());
+            stmt.setString(6,utilisateur.getDescription());
             return stmt.executeUpdate();         
         }
         catch(Exception e)
