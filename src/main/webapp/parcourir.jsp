@@ -33,73 +33,72 @@
         <link rel="stylesheet" href="libs/mediaelement/build/mep.css" type="text/css" />
     </head>
     <body>
-        <div class="app dk" id="app">
-            <!-- #Debut MENU -->
-            <jsp:include page="templates/menu.jsp" />
-            <!-- #Fin MENU -->
-
-            <!-- #Debut CONTENU -->
-            <div id="content" class="app-content white bg box-shadow-z2" role="main">
-                <jsp:include page="templates/musiqueplayer_logo.jsp" />
-
-                <!-- Parcourir -->
-                <div class="app-body" id="view">
-                    <div class="page-content">
-                        <div class="row-col">
-                            <div class="col-lg-9 b-r no-border-md">
-                                <div class="padding">
-                                    <div class="page-title m-b">
-                                        <h1 class="inline m-a-0">Parcourir</h1>
-                                        <div class="dropdown inline">
-                                            <button class="btn btn-sm no-bg h4 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">Tous</button>
-                                            <div class="dropdown-menu">
-                                                <a href="#" class="dropdown-item active">
-                                                  Tous
-                                                </a>
-                                                <a href="#" class="dropdown-item">
-                                                  Rock
-                                                </a>
-                                                <a href="#" class="dropdown-item">
-                                                  Pop
-                                                </a>
-                                            </div>
+        <!-- #Debut MENU -->
+        <jsp:include page="templates/menu.jsp" />
+        <!-- #Fin MENU -->
+        
+        <!-- #Debut CONTENU -->
+        <div id="content" class="app-content white bg box-shadow-z2" role="main">
+            <jsp:include page="templates/musiqueplayer_logo.jsp" />
+            
+            <!-- Parcourir -->
+            <div class="app dk" id="app">
+                <div class="page-content">
+                    <div class="row-col">
+                        <div class="col-lg-9 b-r no-border-md">
+                            <div class="padding">
+                                <div class="page-title m-b">
+                                    <h1 class="inline m-a-0">Parcourir</h1>
+                                    <div class="dropdown inline">
+                                        <button class="btn btn-sm no-bg h4 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">Tous</button>
+                                        <div class="dropdown-menu">
+                                            <a href="#" class="dropdown-item active">
+                                              Tous
+                                            </a>
+                                            <a href="#" class="dropdown-item">
+                                              Rock
+                                            </a>
+                                            <a href="#" class="dropdown-item">
+                                              Pop
+                                            </a>
                                         </div>
-                                        <div class="row">
-                                            <% for(int i=0;i<6;i++){ %>
-                                            <div class="col-xs-4 col-sm-4 col-md-3">
-                                                <div class="item r" data-id="item-3" data-src="http://api.soundcloud.com/tracks/79031167/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                                                    <div class="item-media ">
-                                                        <a href="#" class="item-media-content" style="background-image: url('images/b2.jpg');"></a>
-                                                        <div class="item-overlay center">
-                                                            <button  class="btn-playpause">Play</button>
-                                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <% for(int i=0;i<6;i++){ %>
+                                        <div class="col-xs-4 col-sm-4 col-md-3">
+                                            <div class="item r" data-id="item-3" data-src="http://api.soundcloud.com/tracks/79031167/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+                                                <div class="item-media ">
+                                                    <a href="#" class="item-media-content" style="background-image: url('images/b2.jpg');"></a>
+                                                    <div class="item-overlay center">
+                                                        <button  class="btn-playpause">Play</button>
                                                     </div>
-                                                    <div class="item-info">
-                                                        <div class="item-overlay bottom text-right">
-                                                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                                                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                                                            <div class="dropdown-menu pull-right black lt"></div>
-                                                        </div>
-                                                        <div class="item-title text-ellipsis">
-                                                            <a href="#">I Wanna Be In the Cavalry  <% out.print(i); %></a>
-                                                        </div>
-                                                        <div class="item-author text-sm text-ellipsis ">
-                                                            <a class="text-muted">Jeremy Scott</a>
-                                                        </div>
+                                                </div>
+                                                <div class="item-info">
+                                                    <div class="item-overlay bottom text-right">
+                                                        <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                                                        <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                                                        <div class="dropdown-menu pull-right black lt"></div>
+                                                    </div>
+                                                    <div class="item-title text-ellipsis">
+                                                        <a href="#">I Wanna Be In the Cavalry  <% out.print(i); %></a>
+                                                    </div>
+                                                    <div class="item-author text-sm text-ellipsis ">
+                                                        <a class="text-muted">Jeremy Scott</a>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <% } %>
                                         </div>
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- /Parcourir -->
             </div>
-        </div>    
+            <!-- /Parcourir -->
+        </div>
+            
         <script src="libs/jquery/dist/jquery.js"></script>
         <!-- Bootstrap -->
         <script src="libs/tether/dist/js/tether.min.js"></script>

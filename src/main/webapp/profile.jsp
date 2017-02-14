@@ -40,248 +40,246 @@
     <script src="libs/jquery/dist/jquery.js"></script>
     <script src="scripts/angular.min.js"></script>
     <body ng-app="myApp" ng-controller="myCtrl">
-        <div class="app dk" id="app">
-            <!-- #Debut MENU -->
-            <jsp:include page="templates/menu.jsp" />
-            <!-- #Fin MENU -->
-
-            <!-- #Debut CONTENU -->
-            <div id="content" class="app-content white bg box-shadow-z2" role="main">
-                <jsp:include page="templates/musiqueplayer_logo.jsp" />
-
-                <!-- Profile -->
-                <div class="app-body" id="view">
-                    <div class="page-bg" data-stellar-ratio="2" style="background-image: url('images/a3.jpg');"></div>
-                    <div class="page-content">
-                        <div class="padding b-b">
-                            <div class="row-col">
-                                <div class="col-sm w w-auto-xs m-b">
-                                    <div class="item w rounded">
-                                        <div class="item-media">
-                                            <div class="item-media-content" style="background-image: url('images/a3.jpg');"></div>
-                                        </div>
+        <!-- #Debut MENU -->
+        <jsp:include page="templates/menu.jsp" />
+        <!-- #Fin MENU -->
+        
+        <!-- #Debut CONTENU -->
+        <div id="content" class="app-content white bg box-shadow-z2" role="main">
+            <jsp:include page="templates/musiqueplayer_logo.jsp" />
+            
+            <!-- Profile -->
+            <div class="app dk" id="app">
+                <div class="page-bg" data-stellar-ratio="2" style="background-image: url('images/a3.jpg');"></div>
+                <div class="page-content">
+                    <div class="padding b-b">
+                        <div class="row-col">
+                            <div class="col-sm w w-auto-xs m-b">
+                                <div class="item w rounded">
+                                    <div class="item-media">
+                                        <div class="item-media-content" style="background-image: url('images/a3.jpg');"></div>
                                     </div>
                                 </div>
-                                <div class="col-sm">
-                                    <div class="p-l-md no-padding-xs">
-                                        <h1 class="page-title">
-                                            <% if(session.getAttribute("utilisateur")!=null){ 
-                                                Utilisateur user = (Utilisateur)session.getAttribute("utilisateur");
-                                            %>
-                                          <span class="h1 _800"><% out.print(user.getNomUtilisateur()); %> <% out.print(user.getPrenomsUtilisateur()); %></span>
-
-                                        </h1>
-                                        <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis"><% out.print(user.getDescription()); %></p>
-                                        <div class="item-action m-b">
-                                            <a data-toggle="modal" data-target="#upload" class="btn btn-sm rounded primary">Upload Zik</a>
-                                            <a href="#" class="btn btn-sm rounded blue">Nouveau playlist</a>
-                                            <a href="#" class="btn btn-sm rounded white">Editer Profile</a>
-                                        </div>
-                                        <div class="block clearfix m-b">
-                                            <span>9</span> <span class="text-muted">Playlists</span>, <span>{{myZik.length}}</span> <span class="text-muted">Ziks</span>
-                                        </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="p-l-md no-padding-xs">
+                                    <h1 class="page-title">
+                                        <% if(session.getAttribute("utilisateur")!=null){ 
+                                            Utilisateur user = (Utilisateur)session.getAttribute("utilisateur");
+                                        %>
+                                      <span class="h1 _800"><% out.print(user.getNomUtilisateur()); %> <% out.print(user.getPrenomsUtilisateur()); %></span>
+                                        
+                                    </h1>
+                                    <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis"><% out.print(user.getDescription()); %></p>
+                                    <div class="item-action m-b">
+                                        <a data-toggle="modal" data-target="#upload" class="btn btn-sm rounded primary">Upload Zik</a>
+                                        <a href="#" class="btn btn-sm rounded blue">Nouveau playlist</a>
+                                        <a href="#" class="btn btn-sm rounded white">Editer Profile</a>
                                     </div>
-
+                                    <div class="block clearfix m-b">
+                                        <span>9</span> <span class="text-muted">Playlists</span>, <span>{{myZik.length}}</span> <span class="text-muted">Ziks</span>
+                                    </div>
                                 </div>
-                            </div> 
-                        </div>
+                                    
+                            </div>
+                        </div> 
                     </div>
-                    <div class="row-col">
-                        <div class="col-lg-9 b-r no-border-md">
-                            <div class="padding p-y-0 m-b-md">
-                                <!-- Tabs -->
-                                <div class="nav-active-border b-primary bottom m-b-md m-t">
-                                    <ul class="nav l-h-2x" data-ui-jp="taburl">
-                                        <li class="nav-item m-r inline">
-                                            <a class="nav-link active" href="#" data-toggle="tab" data-target="#ziks">Ziks</a>
-                                        </li>
-                                        <li class="nav-item m-r inline">
-                                            <a class="nav-link" href="#" data-toggle="tab" data-target="#playlist">Playlists</a>
-                                        </li>
-                                        <li class="nav-item m-r inline">
-                                            <a class="nav-link" href="#" data-toggle="tab" data-target="#favoris">Favoris</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="tab-content">
-                                    <!-- Ziks -->
-                                    <div class="tab-pane active" id="ziks">
-                                        <div class="row item-list item-list-by m-b">
-
-                                            <div class="col-xs-12" ng-repeat="zik in myZik">
-                                                <div class="item r" data-id="item-{{zik.idMusique}}" data-src="{{zik.lienMusique | trusted}}">
-                                                    <div class="item-media ">
-                                                        <a href="#" class="item-media-content" style="background-image: url('images/b9.jpg');"></a>
-                                                        <div class="item-overlay center">
-                                                            <button  class="btn-playpause">Play</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="item-info">
-                                                        <div class="item-overlay bottom text-right">
-                                                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                                                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                                                            <div class="dropdown-menu pull-right black lt"></div>
-                                                        </div>
-                                                        <div class="item-title text-ellipsis">
-                                                            <a href="#">{{zik.titreMusique}}</a>
-                                                        </div>
-                                                        <div class="item-author text-sm text-ellipsis hide">
-                                                            <a href="#" class="text-muted">{{zik.artisteMusique}}</a>
-                                                        </div>
-                                                        <div class="item-meta text-sm text-muted">
-                                                            <span class="item-meta-category"><a href="#" class="label">Categorie</a></span>                 
-                                                        </div>
-
-                                                        <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
-                                                            Cliquer sur le bouton play.
-                                                        </div>
-
-                                                        <div class="item-action visible-list m-t-sm">
-                                                            <a href="#" class="btn btn-xs white">Modifier</a>
-                                                            <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Supprimer</a>
-                                                        </div>
+                </div>
+                <div class="row-col">
+                    <div class="col-lg-9 b-r no-border-md">
+                        <div class="padding p-y-0 m-b-md">
+                            <!-- Tabs -->
+                            <div class="nav-active-border b-primary bottom m-b-md m-t">
+                                <ul class="nav l-h-2x" data-ui-jp="taburl">
+                                    <li class="nav-item m-r inline">
+                                        <a class="nav-link active" href="#" data-toggle="tab" data-target="#ziks">Ziks</a>
+                                    </li>
+                                    <li class="nav-item m-r inline">
+                                        <a class="nav-link" href="#" data-toggle="tab" data-target="#playlist">Playlists</a>
+                                    </li>
+                                    <li class="nav-item m-r inline">
+                                        <a class="nav-link" href="#" data-toggle="tab" data-target="#favoris">Favoris</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-content">
+                                <!-- Ziks -->
+                                <div class="tab-pane active" id="ziks">
+                                    <div class="row item-list item-list-by m-b">
+                                        
+                                        <div class="col-xs-12" ng-repeat="zik in myZik">
+                                            <div class="item r" data-id="item-{{zik.idMusique}}" data-src="{{zik.lienMusique | trusted}}">
+                                                <div class="item-media ">
+                                                    <a href="#" class="item-media-content" style="background-image: url('images/b9.jpg');"></a>
+                                                    <div class="item-overlay center">
+                                                        <button  class="btn-playpause">Play</button>
                                                     </div>
                                                 </div>
-                                            </div>     
-                                        </div>
-                                        <a href="#" class="btn btn-sm white rounded">Plus</a>
-                                    </div>                    
-                                    <!-- /Ziks -->
-
-                                    <!-- Playlists -->
-                                    <div class="tab-pane" id="playlist">
-                                        <div class="row item-list item-list-by m-b">
-                                            <% for(int i=0;i<5;i++){ %>
-                                            <div class="col-xs-12">
-                                                <div class="item r" data-id="item-10" data-src="http://api.soundcloud.com/tracks/237514750/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                                                    <div class="item-media ">
-                                                        <a href="#" class="item-media-content" style="background-image: url('images/b9.jpg');"></a>
-                                                        <div class="item-overlay center">
-                                                            <button  class="btn-playpause">Play</button>
-                                                        </div>
+                                                <div class="item-info">
+                                                    <div class="item-overlay bottom text-right">
+                                                        <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                                                        <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                                                        <div class="dropdown-menu pull-right black lt"></div>
                                                     </div>
-                                                    <div class="item-info">
+                                                    <div class="item-title text-ellipsis">
+                                                        <a href="#">{{zik.titreMusique}}</a>
+                                                    </div>
+                                                    <div class="item-author text-sm text-ellipsis hide">
+                                                        <a href="#" class="text-muted">{{zik.artisteMusique}}</a>
+                                                    </div>
+                                                    <div class="item-meta text-sm text-muted">
+                                                        <span class="item-meta-category"><a href="#" class="label">Categorie</a></span>                 
+                                                    </div>
 
-                                                        <div class="item-title text-ellipsis">
-                                                            <a href="#">My playlist</a>
-                                                        </div>
-                                                        <div class="item-author text-sm text-ellipsis hide">
-                                                            <a href="artist.detail.html" class="text-muted">Postiljonen</a>
-                                                        </div>
-                                                        <div class="item-meta text-sm text-muted">
-                                                            <span class="item-meta-stats text-xs ">
-                                                                <i class="fa fa-play text-muted"></i> 30 
-                                                                <i class="fa fa-heart m-l-sm text-muted"></i> 10
-                                                            </span>
-                                                        </div>
+                                                    <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
+                                                        Cliquer sur le bouton play.
+                                                    </div>
 
-                                                        <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
-                                                            Cry -- A thousand years 
-                                                        </div>
-
-                                                        <div class="item-action visible-list m-t-sm">
-                                                            <a href="#" class="btn btn-xs white">Modifier</a>
-                                                            <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Supprimer</a>
-                                                        </div>
+                                                    <div class="item-action visible-list m-t-sm">
+                                                        <a href="#" class="btn btn-xs white">Modifier</a>
+                                                        <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Supprimer</a>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <% } %>
-                                        </div>
-                                        <a href="#" class="btn btn-sm white rounded">Plus</a>
+                                        </div>     
                                     </div>
-                                    <!-- /Playlists -->
-
-                                    <!-- Favoris -->
-                                    <div class="tab-pane" id="favoris">
-                                        <div class="row item-list item-list-by m-b">
-                                            <% for(int i =0;i<2;i++){ %>
-                                            <div class="col-xs-12">
-                                                <div class="item r" data-id="item-10" data-src="http://api.soundcloud.com/tracks/237514750/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                                                    <div class="item-media ">
-                                                        <a href="#" class="item-media-content" style="background-image: url('images/b9.jpg');"></a>
-                                                        <div class="item-overlay center">
-                                                            <button  class="btn-playpause">Play</button>
-                                                        </div>
+                                    <a href="#" class="btn btn-sm white rounded">Plus</a>
+                                </div>                    
+                                <!-- /Ziks -->
+                                
+                                <!-- Playlists -->
+                                <div class="tab-pane" id="playlist">
+                                    <div class="row item-list item-list-by m-b">
+                                        <% for(int i=0;i<5;i++){ %>
+                                        <div class="col-xs-12">
+                                            <div class="item r" data-id="item-10" data-src="http://api.soundcloud.com/tracks/237514750/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+                                                <div class="item-media ">
+                                                    <a href="#" class="item-media-content" style="background-image: url('images/b9.jpg');"></a>
+                                                    <div class="item-overlay center">
+                                                        <button  class="btn-playpause">Play</button>
                                                     </div>
-                                                    <div class="item-info">
-                                                        <div class="item-overlay bottom text-right">
-                                                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                                                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                                                            <div class="dropdown-menu pull-right black lt"></div>
-                                                        </div>
-                                                        <div class="item-title text-ellipsis">
-                                                            <a href="#">The Open Road</a>
-                                                        </div>
-                                                        <div class="item-author text-sm text-ellipsis hide">
-                                                            <a class="text-muted">Postiljonen</a>
-                                                        </div>
-                                                        <div class="item-meta text-sm text-muted">
-                                                            <span class="item-meta-category"><a href="browse.html" class="label">Soul</a></span>
-                                                            <span class="item-meta-date text-xs">02.04.2016</span>
-                                                        </div>
+                                                </div>
+                                                <div class="item-info">
 
-                                                        <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
-                                                            Litatem tantae pecuniae? Utram tandem linguam nescio? Sed hoc sane concedamus.
-                                                        </div>
+                                                    <div class="item-title text-ellipsis">
+                                                        <a href="#">My playlist</a>
+                                                    </div>
+                                                    <div class="item-author text-sm text-ellipsis hide">
+                                                        <a href="artist.detail.html" class="text-muted">Postiljonen</a>
+                                                    </div>
+                                                    <div class="item-meta text-sm text-muted">
+                                                        <span class="item-meta-stats text-xs ">
+                                                            <i class="fa fa-play text-muted"></i> 30 
+                                                            <i class="fa fa-heart m-l-sm text-muted"></i> 10
+                                                        </span>
+                                                    </div>
 
-                                                        <div class="item-action visible-list m-t-sm">
-                                                            <a href="#" class="btn btn-xs white">Modifier</a>
-                                                            <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Supprimer</a>
-                                                        </div>
+                                                    <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
+                                                        Cry -- A thousand years 
+                                                    </div>
+
+                                                    <div class="item-action visible-list m-t-sm">
+                                                        <a href="#" class="btn btn-xs white">Modifier</a>
+                                                        <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Supprimer</a>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <% } %>
                                         </div>
-                                        <a href="#" class="btn btn-sm white rounded">Plus</a>
-                                    </div>                    
-                                    <!-- /Favoris -->
+                                        <% } %>
+                                    </div>
+                                    <a href="#" class="btn btn-sm white rounded">Plus</a>
                                 </div>
+                                <!-- /Playlists -->
+                                
+                                <!-- Favoris -->
+                                <div class="tab-pane" id="favoris">
+                                    <div class="row item-list item-list-by m-b">
+                                        <% for(int i =0;i<2;i++){ %>
+                                        <div class="col-xs-12">
+                                            <div class="item r" data-id="item-10" data-src="http://api.soundcloud.com/tracks/237514750/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+                                                <div class="item-media ">
+                                                    <a href="#" class="item-media-content" style="background-image: url('images/b9.jpg');"></a>
+                                                    <div class="item-overlay center">
+                                                        <button  class="btn-playpause">Play</button>
+                                                    </div>
+                                                </div>
+                                                <div class="item-info">
+                                                    <div class="item-overlay bottom text-right">
+                                                        <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                                                        <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                                                        <div class="dropdown-menu pull-right black lt"></div>
+                                                    </div>
+                                                    <div class="item-title text-ellipsis">
+                                                        <a href="#">The Open Road</a>
+                                                    </div>
+                                                    <div class="item-author text-sm text-ellipsis hide">
+                                                        <a class="text-muted">Postiljonen</a>
+                                                    </div>
+                                                    <div class="item-meta text-sm text-muted">
+                                                        <span class="item-meta-category"><a href="browse.html" class="label">Soul</a></span>
+                                                        <span class="item-meta-date text-xs">02.04.2016</span>
+                                                    </div>
+
+                                                    <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
+                                                        Litatem tantae pecuniae? Utram tandem linguam nescio? Sed hoc sane concedamus.
+                                                    </div>
+
+                                                    <div class="item-action visible-list m-t-sm">
+                                                        <a href="#" class="btn btn-xs white">Modifier</a>
+                                                        <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Supprimer</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                    <a href="#" class="btn btn-sm white rounded">Plus</a>
+                                </div>                    
+                                <!-- /Favoris -->
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- /Profile -->
             </div>
-
-            <!-- #Fin CONTENU -->
-            <div id="loader" style="display: none;"></div>
-            <!-- Modal -->
-            <div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="h1_800">Upload Zik</h1>
-                        </div>
-                        <form id="uploader">
-                            <input type="hidden" value="<% out.print(user.getIdUtilisateur()); %>" name="userId" />
-                            <div class="modal-body">            
-                                <div class="form-group">
-                                    Choisissez votre zik : <input type="file" class="form-control" name="nomFichier" accept="audio/mp3"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="nomZik">Nom de la Zik : </label>
-                                    <input type="text" class="form-control" placeholder="Nom de la zik" name="nomZik" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="auteur">Auteur : </label>
-                                    <input type="text" class="form-control" placeholder="Auteur" name="auteur"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="categorie">Categorie</label>
-                                    <select id="categorie" name="categorie" class="form-control">
-                                        <option ng-repeat="categorie in myCategorie" value="{{categorie.idCategorieMusique}}">{{categorie.nomCategorie}}</option>
-                                    </select>
-                                </div>                       
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                                <input class="btn btn-success btn-ok" type="submit" value="Uploader"/>
-                            </div>
-                        </form>
+            <!-- /Profile -->
+        </div>
+        
+        <!-- #Fin CONTENU -->
+        <div id="loader" style="display: none;"></div>
+        <!-- Modal -->
+        <div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+            
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="h1_800">Upload Zik</h1>
                     </div>
+                    <form id="uploader">
+                        <input type="hidden" value="<% out.print(user.getIdUtilisateur()); %>" name="userId" />
+                        <div class="modal-body">            
+                            <div class="form-group">
+                                Choisissez votre zik : <input type="file" class="form-control" name="nomFichier" accept="audio/mp3"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="nomZik">Nom de la Zik : </label>
+                                <input type="text" class="form-control" placeholder="Nom de la zik" name="nomZik" />
+                            </div>
+                            <div class="form-group">
+                                <label for="auteur">Auteur : </label>
+                                <input type="text" class="form-control" placeholder="Auteur" name="auteur"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="categorie">Categorie</label>
+                                <select id="categorie" name="categorie" class="form-control">
+                                    <option ng-repeat="categorie in myCategorie" value="{{categorie.idCategorieMusique}}">{{categorie.nomCategorie}}</option>
+                                </select>
+                            </div>                       
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                            <input class="btn btn-success btn-ok" type="submit" value="Uploader"/>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
