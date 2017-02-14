@@ -1,5 +1,6 @@
 package mapping;
 
+import exception.UtilisateurException;
 import fonctions.Fonction;
 import java.sql.Date;
 
@@ -24,7 +25,7 @@ public class Utilisateur
         this.setMotdepasse(motdepasse);
         this.setDescription(description);
     }
-    public Utilisateur(String nomUtilisateur, String prenomsUtilisateur, String dateNaissance, String email, String motdepasse, String description) throws Exception
+    public Utilisateur(String nomUtilisateur, String prenomsUtilisateur, String dateNaissance, String email, String motdepasse, String description) throws UtilisateurException
     {
         this.setNomUtilisateur(nomUtilisateur);
         this.setPrenomsUtilisateur(prenomsUtilisateur);
@@ -90,9 +91,16 @@ public class Utilisateur
     {
         this.dateNaissance = dateNaissance;
     }
-    public void setDateNaissance(String dateNaissance) throws Exception
+    public void setDateNaissance(String dateNaissance) throws UtilisateurException
     {
-        this.dateNaissance = Fonction.getSqlDate(dateNaissance);
+        try
+        {
+            this.dateNaissance = Fonction.getSqlDate(dateNaissance);
+        }
+        catch(Exception ex)
+        {
+            throw new UtilisateurException("Date de naissance invalide");
+        }
     }
     
     public void setEmail(String email)

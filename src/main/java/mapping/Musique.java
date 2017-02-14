@@ -1,5 +1,7 @@
 package mapping;
 
+import java.sql.Date;
+
 public class Musique 
 {
     // Attributs
@@ -10,6 +12,7 @@ public class Musique
     private String artisteMusique;
     private String imageMusique;
     private String lienMusique;
+    private Date dateInsertionMusique;
     
     // Constructeur(s)
     public Musique(int idMusique, int idUtilisateur, int idCategorieMusique, String titreMusique, String artisteMusique, String imageMusique, String lienMusique)
@@ -22,6 +25,17 @@ public class Musique
         this.setImageMusique(imageMusique);
         this.setLienMusique(lienMusique);
     }
+    public Musique(int idMusique, int idUtilisateur, int idCategorieMusique, String titreMusique, String artisteMusique, String imageMusique, String lienMusique,Date dateInsertionMusique)
+    {
+        this.setIdMusique(idMusique);
+        this.setIdUtilisateur(idUtilisateur);
+        this.setIdCategorieMusique(idCategorieMusique);
+        this.setTitreMusique(titreMusique);
+        this.setArtisteMusique(artisteMusique);
+        this.setImageMusique(imageMusique);
+        this.setLienMusique(lienMusique);
+        this.setDateInsertionMusique(dateInsertionMusique);
+    }
     public Musique(int idUtilisateur, int idCategorieMusique, String titreMusique, String artisteMusique, String imageMusique, String lienMusique,boolean t)
     {
         this.setIdUtilisateur(idUtilisateur);
@@ -29,7 +43,7 @@ public class Musique
         this.setTitreMusique(titreMusique);
         this.setArtisteMusique(artisteMusique);
         this.setImageMusique(imageMusique);
-        this.setNouveauLienMusique(lienMusique,t);
+        this.setNouveauLienMusique(lienMusique,true);
     }
     
     // Getters
@@ -67,6 +81,10 @@ public class Musique
     {
         return lienMusique;
     }
+
+    public Date getDateInsertionMusique() {
+        return dateInsertionMusique;
+    }
     
     // Setters
     public void setIdMusique(int idMusique)
@@ -98,15 +116,21 @@ public class Musique
     {
         this.imageMusique = imageMusique;
     }
+
+    public void setNouveauLienMusique(String lienMusique,boolean t)
+    {
+        this.lienMusique = "http://docs.google.com/uc?export=open&id="+lienMusique;
+    }
     
     public void setLienMusique(String lienMusique)
     {
         this.lienMusique = lienMusique;
     }
-    
-    public void setNouveauLienMusique(String lienMusique,boolean t)
+
+    public void setDateInsertionMusique(Date dateInsertionMusique)
     {
-        this.lienMusique = "http://docs.google.com/uc?export=open&id="+lienMusique;
+        this.dateInsertionMusique = dateInsertionMusique;
     }
+    
     
 }

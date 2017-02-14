@@ -4,9 +4,6 @@
 <%@page import="mapping.Utilisateur"%>
 <% 
     HttpServletResponse httpResponse = (HttpServletResponse) response;
-    httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
-    httpResponse.setHeader("Pragma", "no-cache"); // HTTP 1.0
-    httpResponse.setDateHeader("Expires", 0); // Proxies.
     if(session.getAttribute("utilisateur")==null)
     {
         response.sendRedirect("index.jsp");
@@ -131,8 +128,7 @@
                                                         <a href="#" class="text-muted">{{zik.artisteMusique}}</a>
                                                     </div>
                                                     <div class="item-meta text-sm text-muted">
-                                                        <span class="item-meta-category"><a href="#" class="label">Categorie</a></span>
-                                                        
+                                                        <span class="item-meta-category"><a href="#" class="label">Categorie</a></span>                 
                                                     </div>
 
                                                     <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">

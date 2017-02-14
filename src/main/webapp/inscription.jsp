@@ -51,34 +51,35 @@
             <!-- #Debut FORMULAIRE INSCRIPTION -->
             <div class="b-t">
                 <div class="center-block w-xxl w-auto-xs p-y-md text-left">
+                    <div id="erreur"></div>
                     <div class="p-a-md">
                         <form name="form">
                             <div class="form-group">
                                 <label for="nom" class="control-label">Nom</label>
-                                <input type="text" placeholder="Nom" name="nom" class="form-control" id="nom" required>
+                                <input type="text" placeholder="Nom" name="nom" class="form-control" id="nom">
                             </div>
                             <div class="form-group">
                                 <label for="prenoms" class="control-label">Prenoms</label>
-                                <input type="text" placeholder="Prenoms" name="prenoms" class="form-control" id="prenoms" required>
+                                <input type="text" placeholder="Prenoms" name="prenoms" class="form-control" id="prenoms">
                             </div>
                             <div class="form-group">
                                 <label for="datepicker" class="control-label">Date de naissance</label>
-                                <input type="text" placeholder="Date de naissance" name="datenaissance" class="form-control" id="datepicker" required>
+                                <input type="text" placeholder="Date de naissance" name="datenaissance" class="form-control" id="datepicker">
                             </div>
                             <div class="form-group">
                                 <label for="email" class="control-label">Email</label>
-                                <input type="email" placeholder="Email" name="email" class="form-control" id="email" required>
+                                <input type="text" placeholder="Email" name="email" class="form-control" id="email">
                             </div>
                             <div class="form-group">
                                 <label for="mdp" class="control-label">Mot de passe</label>
-                                <input type="password" placeholder="Mot de passe" name="mdp" class="form-control" id="mdp" required>
+                                <input type="password" placeholder="Mot de passe" name="mdp" class="form-control" id="mdp">
                             </div>
                             <div class="form-group">
                                 <label for="cmdp" class="control-label">Confirmer votre mot de passe</label>
-                                <input type="password" placeholder="Confirmer votre mot de passe" name="cmdp" class="form-control" id="cmdp" required>
+                                <input type="password" placeholder="Confirmer votre mot de passe" name="cmdp" class="form-control" id="cmdp">
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-lg black p-x-lg">S'inscrire</button>
+                                <button type="button" class="btn btn-lg black p-x-lg" id="inscription">S'inscrire</button>
                             </div>
                         </form>
                     </div>
@@ -99,7 +100,151 @@
         <script>
             $( function() 
             {
-                $( "#datepicker" ).datepicker({ changeMonth: true ,changeYear : true});
+                $( "#datepicker" ).datepicker({ changeMonth: true ,changeYear : true, defaultDate: new Date('1 January 1997')});
+                $("#inscription").click(function(){ 
+                    var nom = document.getElementById('nom').value;
+                    var prenoms = document.getElementById("prenoms").value;
+                    var email = document.getElementById("email").value;
+                    var mdp = document.getElementById("mdp").value;
+                    var cmdp = document.getElementById("cmdp").value;
+                    var datenaissance = document.getElementById("datepicker").value;
+                    
+                    if(nom=="" || prenoms=="" || email=="" || mdp=="" || cmdp=="" || datenaissance=="")
+                    {
+                        $("#erreur").empty();
+                        var erreur = document.getElementById("erreur");
+                        erreur.setAttribute("class","alert-danger");
+                        var p = document.createElement("P");
+                        $(p).prepend('Veuillez remplir les champs vides');
+                        $(erreur).append(p);
+                    }
+                    else
+                    {
+                        $.ajax({
+                           type: 'POST',
+                           url: 'Inscription',
+                           data: 'nom='+nom+'&prenoms='+prenoms+'&datenaissance='+datenaissance+'&email='+email+'&mdp='+mdp+'&cmdp='+cmdp,
+                           dataType : 'text',
+                           success: function(data,status)
+                           {
+                               if(data!="True")
+                               {
+                                   $("#erreur").empty();
+                                    var erreur = document.getElementById("erreur");
+                                    erreur.setAttribute("class","alert-danger");
+                                    var p = document.createElement("P");
+                                    $(p).prepend(data);
+                                    $(erreur).append(p);
+                               }
+                               else
+                               {
+                                   alert("Inscription reussie");
+                                   window.location.href = "index.jsp";
+                               }
+                           }
+                        });
+                    }
+                });
+                $("#email").keyup(function(){
+                    var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{4,}\.[a-z]{2,4}$/;
+                    if(!regex.test($(this).val()))
+                    {
+                        $("#erreur").empty();
+                        var erreur = document.getElementById("erreur");
+                        erreur.setAttribute("class","alert-danger");
+                        var p = document.createElement("P");
+                        $(p).prepend("L'email n'est pas valide");
+                        $(erreur).append(p);
+                    }
+                    else
+                    {
+                        $("#erreur").empty();
+                        var erreur = document.getElementById("erreur");
+                        erreur.setAttribute("class","alert-success");
+                        var p = document.createElement("P");
+                        $(p).prepend("Email valide");
+                        $(erreur).append(p);
+                    }
+                });
+                $("#mdp").keyup(function(){
+                    var majRegex = new RegExp("(?=.*[A-Z]).*$","g");
+                    var chiffreRegex = new RegExp("(?=.*[0-9]).*$","g");                  
+                    var tailleRegex = new RegExp("(?=.{8,}).*$", "g");
+                    var specRegex = new RegExp("(?=.*\\W).*$","g");
+                    $("#cmdp").val("");
+                    
+                    $("#erreur").empty();   
+                    if (tailleRegex.test($(this).val()) === false) 
+                    {
+                        $("#erreur").empty();
+                        var erreur = document.getElementById("erreur");
+                        erreur.setAttribute("class","alert-danger");
+                        var p = document.createElement("P");
+                        $(p).prepend('Le mot de passe doit faire au moins 8 caracteres');
+                        $(erreur).append(p);
+                    }  
+                    else
+                    {
+                        if (majRegex.test($(this).val()) === false) 
+                        {
+                            $("#erreur").empty();
+                            var erreur = document.getElementById("erreur");
+                            erreur.setAttribute("class","alert-danger");
+                            var p = document.createElement("P");
+                            $(p).prepend('Le mot de passe doit contenir au moins 1 majuscule');
+                            $(erreur).append(p);
+                        }  
+                        else if (chiffreRegex.test($(this).val()) === false) 
+                        {
+                            $("#erreur").empty();
+                            var erreur = document.getElementById("erreur");
+                            erreur.setAttribute("class","alert-danger");
+                            var p = document.createElement("P");
+                            $(p).prepend('Le mot de passe doit contenir au moins 1 chiffre');
+                            $(erreur).append(p);
+                        }  
+                        else if (specRegex.test($(this).val()) === false) 
+                        {
+                            $("#erreur").empty();
+                            var erreur = document.getElementById("erreur");
+                            erreur.setAttribute("class","alert-danger");
+                            var p = document.createElement("P");
+                            $(p).prepend('Le mot de passe doit contenir au moins 1 caractere special');
+                            $(erreur).append(p);
+                        }  
+                        else
+                        {  
+                            $("#erreur").empty();
+                            var ok = document.getElementById("erreur");
+                            ok.setAttribute("class","alert-success");
+                            var p = document.createElement("P");
+                            $(p).prepend('Mot de passe valide');
+                            $(ok).append(p);
+                        }
+                    }
+                });
+                $("#cmdp").keyup(function(){
+                    var motdepasse = $("#mdp").val();
+                    var confirm = $("#cmdp").val();
+                    if(motdepasse===confirm)
+                    {
+                        $("#erreur").empty();
+                        var erreur = document.getElementById("erreur");
+                        erreur.setAttribute("class","alert-success");
+                        var p = document.createElement("P");
+                        $(p).prepend('Les mots de passes sont identiques');
+                        $(erreur).append(p);
+                    }
+                    else
+                    {
+                        $("#erreur").empty();
+                        var erreur = document.getElementById("erreur");
+                        erreur.setAttribute("class","alert-danger");
+                        var p = document.createElement("P");
+                        $(p).prepend('Les mots de passes ne sont pas identiques');
+                        $(erreur).append(p);
+                    }
+                });
             });
         </script>
     </body>

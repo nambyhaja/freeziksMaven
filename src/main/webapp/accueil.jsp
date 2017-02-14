@@ -1,12 +1,15 @@
+<%@page import="mapping.Musique"%>
+<%@page import="utilDB.Operations"%>
 <% 
     HttpServletResponse httpResponse = (HttpServletResponse) response;
-    httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
-    httpResponse.setHeader("Pragma", "no-cache"); // HTTP 1.0
-    httpResponse.setDateHeader("Expires", 0); // Proxies.
     if(session.getAttribute("utilisateur")==null)
     {
         response.sendRedirect("index.jsp");
     }
+    else
+    {
+        Musique[] topMusiques = Operations.findMusiquesTopSemaine();
+        Musique[] recentMusiques = Operations.findMusiquesRecents();
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -35,6 +38,7 @@
         <link rel="stylesheet" href="libs/mediaelement/build/mediaelementplayer.min.css" type="text/css" />
         <link rel="stylesheet" href="libs/mediaelement/build/mep.css" type="text/css" />
     </head>
+    
     <body>
         <!-- #Debut MENU -->
         <jsp:include page="templates/menu.jsp" />
@@ -66,9 +70,9 @@
                                             }
                                         }"
                                     >
-                                        <% for(int i=0;i<10;i++){ %>
-                                        <div class="">
-                                            <div class="item r" data-id="item-5" data-src="http://streaming.radionomy.com/JamendoLounge">
+                                        <% for(int i=0;i<topMusiques.length;i++){ %>
+                                        <div>
+                                            <div class="item r" data-id="item-<% out.print(topMusiques[i].getIdMusique()); %>" data-src="<% out.print(topMusiques[i].getLienMusique()); %>">
                                                 <div class="item-media item-media-4by3">
                                                     <a class="item-media-content" style="background-image: url('images/b2.jpg');"></a>
                                                     <div class="item-overlay center">
@@ -82,10 +86,10 @@
                                                         <div class="dropdown-menu pull-right black lt"></div>
                                                     </div>
                                                     <div class="item-title text-ellipsis">
-                                                        <a href="track.detail.html">Live Radio <% out.print(i); %></a>
+                                                        <a href="track.detail.html"><% out.print(topMusiques[i].getTitreMusique()); %></a>
                                                     </div>
                                                     <div class="item-author text-sm text-ellipsis ">
-                                                        <a class="text-muted">Radionomy</a>
+                                                        <a class="text-muted"><% out.print(topMusiques[i].getArtisteMusique()); %></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,9 +102,9 @@
                                 <!-- RECENT -->
                                 <h2 class="widget-title h4 m-b">Recent</h2>
                                 <div class="row">
-                                    <% for(int i=0;i<6;i++){ %>
+                                    <% for(int i=0;i<recentMusiques.length;i++){ %>
                                     <div class="col-xs-4 col-sm-4 col-md-3">
-                                        <div class="item r" data-id="item-3" data-src="http://api.soundcloud.com/tracks/79031167/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+                                        <div class="item r" data-id="item-<% out.print(recentMusiques[i].getIdMusique()); %>" data-src="<% out.print(recentMusiques[i].getLienMusique()); %>">
                                             <div class="item-media ">
                                                 <a href="#" class="item-media-content" style="background-image: url('images/b2.jpg');"></a>
                                                 <div class="item-overlay center">
@@ -114,10 +118,10 @@
                                                     <div class="dropdown-menu pull-right black lt"></div>
                                                 </div>
                                                 <div class="item-title text-ellipsis">
-                                                    <a href="#">I Wanna Be In the Cavalry  <% out.print(i); %></a>
+                                                    <a href="#"><% out.print(recentMusiques[i].getTitreMusique()); %></a>
                                                 </div>
                                                 <div class="item-author text-sm text-ellipsis ">
-                                                    <a class="text-muted">Jeremy Scott</a>
+                                                    <a class="text-muted"><% out.print(recentMusiques[i].getArtisteMusique()); %></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -165,8 +169,9 @@
         </div>
         
         <!-- #Fin CONTENU -->
-        
+    
         <script src="libs/jquery/dist/jquery.js"></script>
+        
         <!-- Bootstrap -->
         <script src="libs/tether/dist/js/tether.min.js"></script>
         <script src="libs/bootstrap/dist/js/bootstrap.js"></script>
@@ -196,5 +201,6 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/site.js"></script>
         <script src="scripts/ajax.js"></script>
+    <% } %>   
     </body>
 </html>

@@ -20,6 +20,14 @@
         <servlet-name>GetCategorieMusique</servlet-name>
         <servlet-class>servlet.GetCategorieMusique</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Inscription</servlet-name>
+        <servlet-class>servlet.Inscription</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetTopMusique</servlet-name>
+        <servlet-class>servlet.GetTopMusique</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Connexion</servlet-name>
         <url-pattern>/Connexion</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>GetCategorieMusique</servlet-name>
         <url-pattern>/GetCategorieMusique</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Inscription</servlet-name>
+        <url-pattern>/Inscription</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetTopMusique</servlet-name>
+        <url-pattern>/GetTopMusique</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

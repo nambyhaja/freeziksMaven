@@ -1,4 +1,5 @@
 utilDB\UtilDB.class
+exception\UtilisateurException.class
 fonctions\Upload.class
 mapping\Utilisateur.class
 servlet\GetMusique.class
@@ -9,7 +10,9 @@ utilDB\Operations.class
 fonctions\Fonction.class
 mapping\Musique.class
 mapping\CategorieMusique.class
+servlet\GetTopMusique.class
 fonctions\TEST.class
 servlet\Deconnexion.class
 fonctions\FileUploadProgressListener.class
+servlet\Inscription.class
 servlet\GetCategorieMusique.class
