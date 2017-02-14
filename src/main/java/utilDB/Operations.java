@@ -2,6 +2,7 @@ package utilDB;
 
 import exception.UtilisateurException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -182,8 +183,8 @@ public class Operations
     public static void insererMusique(Musique musique) throws Exception
     {
         Connection c = UtilDB.getPostgresConnection();
-        String sql="insert into musique (idutilisateur,idcategoriemusique,titremusique,artistemusique,imagemusique,lienmusique) "
-                + "values(?,?,?,?,?,?)";
+        String sql="insert into musique (idutilisateur,idcategoriemusique,titremusique,artistemusique,imagemusique,lienmusique,dateinsertionmusique) "
+                + "values(?,?,?,?,?,?,?)";
         PreparedStatement prd = c.prepareStatement(sql);
         prd.setInt(1, musique.getIdUtilisateur());
         prd.setInt(2, musique.getIdCategorieMusique());
@@ -191,6 +192,7 @@ public class Operations
         prd.setString(4, musique.getArtisteMusique());
         prd.setString(5, musique.getImageMusique());
         prd.setString(6, musique.getLienMusique());
+        prd.setDate(7, Date.valueOf("2017-02-14"));
         
         prd.executeUpdate();
         c.close();
