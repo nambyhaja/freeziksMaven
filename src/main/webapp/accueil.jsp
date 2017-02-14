@@ -40,43 +40,76 @@
     </head>
     
     <body>
-        <!-- #Debut MENU -->
-        <jsp:include page="templates/menu.jsp" />
-        <!-- #Fin MENU -->
-        
-        <!-- #Debut CONTENU -->
-        <div id="content" class="app-content white bg box-shadow-z2" role="main">
-            <jsp:include page="templates/musiqueplayer_logo.jsp" />
-            
-            <!-- Accueil -->
-            <div class="app dk" id="app">
-                <div class="page-content">
-                    <div class="row-col">
-                        <div class="col-lg-9 b-r no-border-md">
-                            <div class="padding">
-                                <!-- TOP -->
-                                <h2 class="widget-title h4 m-b">Tops de la semaine</h2>
-                                <div class="row">
-                                    <div class="owl-carousel owl-theme owl-dots-center" data-ui-jp="owlCarousel" data-ui-options="{
-                                                margin: 20,
-                                                responsiveClass:true,
-                                            responsive:{
-                                                0:{
-                                                        items: 2
-                                                },
-                                                543:{
-                                                    items: 4
+        <div class="app dk" id="app">
+            <!-- #Debut MENU -->
+            <jsp:include page="templates/menu.jsp" />
+            <!-- #Fin MENU -->
+
+            <!-- #Debut CONTENU -->
+            <div id="content" class="app-content white bg box-shadow-z2" role="main">
+                <jsp:include page="templates/musiqueplayer_logo.jsp" />
+
+                <!-- Accueil -->
+                <div class="app-body" id="view">
+                    <div class="page-content">
+                        <div class="row-col">
+                            <div class="col-lg-9 b-r no-border-md">
+                                <div class="padding">
+                                    <!-- TOP -->
+                                    <h2 class="widget-title h4 m-b">Tops de la semaine</h2>
+                                    <div class="row">
+                                        <div class="owl-carousel owl-theme owl-dots-center" data-ui-jp="owlCarousel" data-ui-options="{
+                                                    margin: 20,
+                                                    responsiveClass:true,
+                                                responsive:{
+                                                    0:{
+                                                            items: 2
+                                                    },
+                                                    543:{
+                                                        items: 4
+                                                    }
                                                 }
-                                            }
-                                        }"
-                                    >
-                                        <% for(int i=0;i<topMusiques.length;i++){ %>
-                                        <div>
-                                            <div class="item r" data-id="item-<% out.print(topMusiques[i].getIdMusique()); %>" data-src="<% out.print(topMusiques[i].getLienMusique()); %>">
-                                                <div class="item-media item-media-4by3">
-                                                    <a class="item-media-content" style="background-image: url('images/b2.jpg');"></a>
+                                            }"
+                                        >
+                                            <% for(int i=0;i<topMusiques.length;i++){ %>
+                                            <div>
+                                                <div class="item r" data-id="item-<% out.print(topMusiques[i].getIdMusique()); %>" data-src="<% out.print(topMusiques[i].getLienMusique()); %>">
+                                                    <div class="item-media item-media-4by3">
+                                                        <a class="item-media-content" style="background-image: url('images/b2.jpg');"></a>
+                                                        <div class="item-overlay center">
+                                                                <button  class="btn-playpause">Play</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="item-overlay bottom text-right">
+                                                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                                                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                                                            <div class="dropdown-menu pull-right black lt"></div>
+                                                        </div>
+                                                        <div class="item-title text-ellipsis">
+                                                            <a href="track.detail.html"><% out.print(topMusiques[i].getTitreMusique()); %></a>
+                                                        </div>
+                                                        <div class="item-author text-sm text-ellipsis ">
+                                                            <a class="text-muted"><% out.print(topMusiques[i].getArtisteMusique()); %></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                    <!-- /TOP -->
+
+                                    <!-- RECENT -->
+                                    <h2 class="widget-title h4 m-b">Recent</h2>
+                                    <div class="row">
+                                        <% for(int i=0;i<recentMusiques.length;i++){ %>
+                                        <div class="col-xs-4 col-sm-4 col-md-3">
+                                            <div class="item r" data-id="item-<% out.print(recentMusiques[i].getIdMusique()); %>" data-src="<% out.print(recentMusiques[i].getLienMusique()); %>">
+                                                <div class="item-media ">
+                                                    <a href="#" class="item-media-content" style="background-image: url('images/b2.jpg');"></a>
                                                     <div class="item-overlay center">
-                                                            <button  class="btn-playpause">Play</button>
+                                                        <button  class="btn-playpause">Play</button>
                                                     </div>
                                                 </div>
                                                 <div class="item-info">
@@ -86,88 +119,56 @@
                                                         <div class="dropdown-menu pull-right black lt"></div>
                                                     </div>
                                                     <div class="item-title text-ellipsis">
-                                                        <a href="track.detail.html"><% out.print(topMusiques[i].getTitreMusique()); %></a>
+                                                        <a href="#"><% out.print(recentMusiques[i].getTitreMusique()); %></a>
                                                     </div>
                                                     <div class="item-author text-sm text-ellipsis ">
-                                                        <a class="text-muted"><% out.print(topMusiques[i].getArtisteMusique()); %></a>
+                                                        <a class="text-muted"><% out.print(recentMusiques[i].getArtisteMusique()); %></a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <% } %>
                                     </div>
-                                </div>
-                                <!-- /TOP -->
-                                
-                                <!-- RECENT -->
-                                <h2 class="widget-title h4 m-b">Recent</h2>
-                                <div class="row">
-                                    <% for(int i=0;i<recentMusiques.length;i++){ %>
-                                    <div class="col-xs-4 col-sm-4 col-md-3">
-                                        <div class="item r" data-id="item-<% out.print(recentMusiques[i].getIdMusique()); %>" data-src="<% out.print(recentMusiques[i].getLienMusique()); %>">
-                                            <div class="item-media ">
-                                                <a href="#" class="item-media-content" style="background-image: url('images/b2.jpg');"></a>
-                                                <div class="item-overlay center">
-                                                    <button  class="btn-playpause">Play</button>
+                                    <!-- /RECENT -->
+
+                                    <!-- RECOMMANDE -->
+                                    <h2 class="widget-title h4 m-b">Recommandé pour vous</h2>
+                                    <div class="row item-list item-list-md m-b">
+                                        <% for(int i=0;i<8;i++){ %>
+                                        <div class="col-sm-6">
+                                            <div class="item r" data-id="item-10" data-src="http://streaming.radionomy.com/JamendoLounge">
+                                                <div class="item-media ">
+                                                    <a href="#" class="item-media-content" style="background-image: url('images/b4.jpg');"></a>
+                                                    <div class="item-overlay center">
+                                                        <button  class="btn-playpause">Play</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="item-info">
-                                                <div class="item-overlay bottom text-right">
-                                                    <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                                                    <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                                                    <div class="dropdown-menu pull-right black lt"></div>
-                                                </div>
-                                                <div class="item-title text-ellipsis">
-                                                    <a href="#"><% out.print(recentMusiques[i].getTitreMusique()); %></a>
-                                                </div>
-                                                <div class="item-author text-sm text-ellipsis ">
-                                                    <a class="text-muted"><% out.print(recentMusiques[i].getArtisteMusique()); %></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <% } %>
-                                </div>
-                                <!-- /RECENT -->
-                                
-                                <!-- RECOMMANDE -->
-                                <h2 class="widget-title h4 m-b">Recommandé pour vous</h2>
-                                <div class="row item-list item-list-md m-b">
-                                    <% for(int i=0;i<8;i++){ %>
-                                    <div class="col-sm-6">
-                                        <div class="item r" data-id="item-10" data-src="http://streaming.radionomy.com/JamendoLounge">
-                                            <div class="item-media ">
-                                                <a href="#" class="item-media-content" style="background-image: url('images/b4.jpg');"></a>
-                                                <div class="item-overlay center">
-                                                    <button  class="btn-playpause">Play</button>
-                                                </div>
-                                            </div>
-                                            <div class="item-info">
-                                                <div class="item-overlay bottom text-right">
-                                                    <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                                                    <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                                                    <div class="dropdown-menu pull-right black lt"></div>
-                                                </div>
-                                                <div class="item-title text-ellipsis">
-                                                    <a href="#">Live Radio <% out.print(i); %></a>
-                                                </div>
-                                                <div class="item-author text-sm text-ellipsis ">
-                                                    <a class="text-muted">Radionomy</a>
+                                                <div class="item-info">
+                                                    <div class="item-overlay bottom text-right">
+                                                        <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                                                        <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                                                        <div class="dropdown-menu pull-right black lt"></div>
+                                                    </div>
+                                                    <div class="item-title text-ellipsis">
+                                                        <a href="#">Live Radio <% out.print(i); %></a>
+                                                    </div>
+                                                    <div class="item-author text-sm text-ellipsis ">
+                                                        <a class="text-muted">Radionomy</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <% } %>
                                     </div>
-                                    <% } %>
+                                    <!-- /RECOMMANDE -->
                                 </div>
-                                <!-- /RECOMMANDE -->
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- /Accueil -->
             </div>
-            <!-- /Accueil -->
         </div>
-        
         <!-- #Fin CONTENU -->
     
         <script src="libs/jquery/dist/jquery.js"></script>

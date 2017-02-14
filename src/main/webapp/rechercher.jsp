@@ -33,14 +33,16 @@
         <link rel="stylesheet" href="libs/mediaelement/build/mep.css" type="text/css" />
     </head>
     <body>
-        <!-- #Debut MENU -->
-        <jsp:include page="templates/menu.jsp" />
-        <!-- #Fin MENU -->
-        
-        <!-- #Debut CONTENU -->
-        <div id="content" class="app-content white bg box-shadow-z2" role="main">
-            <jsp:include page="templates/musiqueplayer_logo.jsp" />
-            
+        <div class="app dk" id="app">
+            <!-- #Debut MENU -->
+            <jsp:include page="templates/menu.jsp" />
+            <!-- #Fin MENU -->
+
+            <!-- #Debut CONTENU -->
+            <div id="content" class="app-content white bg box-shadow-z2" role="main">
+                <jsp:include page="templates/musiqueplayer_logo.jsp" />
+
+            </div>
         </div>
         
         <script src="libs/jquery/dist/jquery.js"></script>
