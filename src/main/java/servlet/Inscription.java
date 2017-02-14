@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mapping.Utilisateur;
 import utilDB.Operations;
+import java.util.regex.*;
 
 public class Inscription extends HttpServlet 
 {
@@ -32,15 +33,32 @@ public class Inscription extends HttpServlet
             String email = request.getParameter("email");
             String mdp = request.getParameter("mdp");
             String cmdp = request.getParameter("cmdp");
+            String description = request.getParameter("description");
+            
+            String mdpRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}$";
+            
+            String emailRegex = "^[a-zA-Z0-9._-]+@[a-z0-9._-]{4,}\\.[a-z]{2,4}$";
             
             Operations.findUtilisateur(email);
-            if(!mdp.equals(cmdp))
+            if(nom=="" || prenoms=="" || email=="" || mdp=="" || cmdp=="" || dateNaissance=="" || description=="")
+            {
+                response.getWriter().write("Veuillez remplir les champs vides'");
+            }
+            else if(!email.matches(emailRegex))
+            {
+                response.getWriter().write("L'email n'est pas valide");
+            }
+            else if(!mdp.matches(mdpRegex))
+            {
+                response.getWriter().write("Le mot de passe doit au moins contenir un chiffre, une majuscule et un caractere special et doit faire au moins 8 caracteres");
+            }
+            else if(!mdp.equals(cmdp))
             {
                 response.getWriter().write("Les mots de passes ne sont pas identiques");
             }
             else
             {
-                Utilisateur nouveau = new Utilisateur(nom, prenoms, dateNaissance, email, mdp, "");
+                Utilisateur nouveau = new Utilisateur(nom, prenoms, dateNaissance, email, mdp, description);
                 Operations.insertUtilisateur(nouveau);
                 response.getWriter().write("True");
             }

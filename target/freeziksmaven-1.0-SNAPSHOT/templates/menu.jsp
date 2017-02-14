@@ -51,16 +51,6 @@
                             <span class="nav-text">Parcourir</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="rechercher.jsp">
-                            <span class="nav-icon">
-                                <i class="material-icons">
-                                  search
-                                </i>
-                            </span>
-                            <span class="nav-text">Rechercher</span>
-                        </a>
-                    </li>
                     <!-- /Menu Principal -->
                     <!-- Menu Collection -->
                     <li class="nav-header hidden-folded">

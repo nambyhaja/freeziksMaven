@@ -80,6 +80,30 @@ public class Operations
         }
     }
     // Operations sur les Musiques
+    public static Musique[] findAllMusique() throws Exception
+    {
+        Connection c = UtilDB.getPostgresConnection();
+        String sql = "select * from musique";
+        
+        PreparedStatement prd = c.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+        
+        ResultSet rs = prd.executeQuery();
+        rs.last();
+        int taille = rs.getRow(),i=0;
+        
+        Musique[] musiques = new Musique[taille];
+        rs.beforeFirst();
+        while(rs.next())
+        {
+            musiques[i] = new Musique(rs.getInt("idmusique"), rs.getInt("idutilisateur"), 
+                    rs.getInt("idcategoriemusique"), rs.getString("titremusique"), 
+                    rs.getString("artistemusique"), rs.getString("imagemusique"), 
+                    rs.getString("lienmusique"));
+            i++;
+        }
+        c.close();
+        return musiques;
+    }
     public static Musique[] findMusique(int idUtilisateur) throws Exception
     {
         Connection c = UtilDB.getPostgresConnection();

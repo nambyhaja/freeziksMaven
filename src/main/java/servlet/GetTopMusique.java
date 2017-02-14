@@ -14,7 +14,32 @@ import utilDB.Operations;
 
 public class GetTopMusique extends HttpServlet 
 {
-
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        PrintWriter out = response.getWriter();
+        response.setContentType("application/json;charset=UTF-8");
+        response.setHeader("Cache-control", "no-cache, no-store");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Expires", "-1");
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "POST");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+        response.setHeader("Access-Control-Max-Age", "86400");
+        try 
+        {
+            Musique[] musiques = Operations.findMusiquesTopSemaine();
+            Gson json = new Gson();
+            String ziks = json.toJson(musiques);
+                      
+            out.print(json.toJson(musiques));
+        } 
+        catch (Exception ex)
+        {
+            
+        }
+    }
+    
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
@@ -24,18 +49,6 @@ public class GetTopMusique extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        try 
-        {
-            Musique[] musiques = Operations.findMusiquesTopSemaine();
-            Gson json = new Gson();
-            String ziks = json.toJson(musiques);
-            
-            response.setContentType("application/json");
-            response.getWriter().write(ziks);
-        } 
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
+       
     }
 }

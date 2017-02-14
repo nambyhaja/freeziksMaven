@@ -35,7 +35,9 @@
         <link rel="stylesheet" href="libs/mediaelement/build/mediaelementplayer.min.css" type="text/css" />
         <link rel="stylesheet" href="libs/mediaelement/build/mep.css" type="text/css" />
     </head>
-    <body>
+    <script src="libs/jquery/dist/jquery.js"></script>
+    <script src="scripts/angular.min.js"></script>
+    <body ng-app="myApp" ng-controller="myCtrl">
         <!-- #Debut MENU -->
         <jsp:include page="templates/menu.jsp" />
         <!-- #Fin MENU -->
@@ -53,23 +55,41 @@
                                 <div class="page-title m-b">
                                     <h1 class="inline m-a-0">Parcourir</h1>
                                     <div class="dropdown inline">
-                                        <button class="btn btn-sm no-bg h4 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">Tous</button>
-                                        <div class="dropdown-menu">
-                                            <a href="#" class="dropdown-item active">
-                                              Tous
-                                            </a>
-                                            <a href="#" class="dropdown-item">
-                                              Rock
-                                            </a>
-                                            <a href="#" class="dropdown-item">
-                                              Pop
-                                            </a>
+                                            <select ng-model="categories" class="form-control">
+                                                <option value="">Tous</option>
+                                                <option ng-repeat="categ in categorie" value="{{categ.idCategorieMusique}}">{{categ.nomCategorie}}</option>
+                                            </select>
+                                       
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label for="rechercheTitre">Rechercher titre : </label>
+                                            <input type="text" ng-model="q" placeholder="Titre" class="form-control" />
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <% for(int i=0;i<6;i++){ %>
-                                        <div class="col-xs-4 col-sm-4 col-md-3">
-                                            <div class="item r" data-id="item-3" data-src="http://api.soundcloud.com/tracks/79031167/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+                                        <div class="form-group">
+                                            <label for="pageSizes">Afficher : </label>
+                                            <select ng-model="pageSize" id="pageSizes" class="form-control">
+                                                <option value="5">5 ziks</option>
+                                                <option value="10">10 ziks</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row text-right">
+                                        <div class="form-group">
+                                            <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" class="btn green-500">
+                                                Precedent
+                                            </button>
+                                            {{currentPage+1}}/{{numberOfPages()}}
+                                            <button ng-disabled="currentPage > getData().length/pageSize - 1" ng-click="currentPage=currentPage+1" class="btn green-500">
+                                                Suivant
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4 col-md-3" ng-repeat="zik in ziks | filter:{titreMusique:q,idCategorieMusique:categories} | startFrom:currentPage*pageSize | limitTo:pageSize">
+                                            <div class="item r" data-id="item-{{zik.idMusique}}" data-src="http://api.soundcloud.com/tracks/79031167/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                                                 <div class="item-media ">
                                                     <a href="#" class="item-media-content" style="background-image: url('images/b2.jpg');"></a>
                                                     <div class="item-overlay center">
@@ -83,15 +103,25 @@
                                                         <div class="dropdown-menu pull-right black lt"></div>
                                                     </div>
                                                     <div class="item-title text-ellipsis">
-                                                        <a href="#">I Wanna Be In the Cavalry  <% out.print(i); %></a>
+                                                        <a href="#">{{zik.titreMusique}}</a>
                                                     </div>
                                                     <div class="item-author text-sm text-ellipsis ">
-                                                        <a class="text-muted">Jeremy Scott</a>
+                                                        <a class="text-muted">{{zik.artisteMusique}}</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <% } %>
+                                    </div>
+                                    <div class="row text-right">
+                                        <div class="form-group">
+                                            <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" class="btn green-500">
+                                                Precedent
+                                            </button>
+                                            {{currentPage+1}}/{{numberOfPages()}}
+                                            <button ng-disabled="currentPage > getData().length/pageSize - 1" ng-click="currentPage=currentPage+1" class="btn green-500">
+                                                Suivant
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +132,6 @@
             <!-- /Parcourir -->
         </div>
             
-        <script src="libs/jquery/dist/jquery.js"></script>
         <!-- Bootstrap -->
         <script src="libs/tether/dist/js/tether.min.js"></script>
         <script src="libs/bootstrap/dist/js/bootstrap.js"></script>
@@ -132,5 +161,47 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/site.js"></script>
         <script src="scripts/ajax.js"></script>
+        
+        <script>
+            var app = angular.module('myApp', []);
+            app.controller('myCtrl', function($scope,$http,$filter) 
+            {
+                $http({
+                    method: 'POST',
+                    url: 'GetAllMusique'
+                }).then(function succes(response) {
+                    $scope.ziks = response.data;
+                });
+                $http({
+                    method: 'POST',
+                    url: 'GetCategorieMusique'
+                }).then(function succes(response) {
+                    $scope.categorie = response.data;
+                });
+                
+                $scope.currentPage = 0;
+                $scope.pageSize = 10;
+                $scope.q = '';
+                
+                $scope.getData = function () 
+                {
+                    return $filter('filter')($scope.ziks, $scope.q)
+                }
+                
+                $scope.numberOfPages=function()
+                {
+                    return Math.ceil($scope.getData().length/$scope.pageSize);                
+                }              
+            });     
+            app.filter('trusted', ['$sce', function ($sce) {
+                return $sce.trustAsResourceUrl;
+            }]);
+            app.filter('startFrom', function() {
+                return function(input, start) {
+                    start = +start; //parse to int
+                    return input.slice(start);
+                }
+            });
+        </script>
     </body>
 </html>

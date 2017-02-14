@@ -28,6 +28,10 @@
         <servlet-name>GetTopMusique</servlet-name>
         <servlet-class>servlet.GetTopMusique</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetAllMusique</servlet-name>
+        <servlet-class>servlet.GetAllMusique</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Connexion</servlet-name>
         <url-pattern>/Connexion</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>GetTopMusique</servlet-name>
         <url-pattern>/GetTopMusique</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllMusique</servlet-name>
+        <url-pattern>/GetAllMusique</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

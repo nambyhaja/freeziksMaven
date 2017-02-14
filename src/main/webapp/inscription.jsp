@@ -71,6 +71,10 @@
                                 <input type="text" placeholder="Email" name="email" class="form-control" id="email">
                             </div>
                             <div class="form-group">
+                                <label for="description" class="control-label">Description</label>
+                                <input type="text" placeholder="Une petite description sur vous" name="description" class="form-control" id="description">
+                            </div>
+                            <div class="form-group">
                                 <label for="mdp" class="control-label">Mot de passe</label>
                                 <input type="password" placeholder="Mot de passe" name="mdp" class="form-control" id="mdp">
                             </div>
@@ -108,8 +112,9 @@
                     var mdp = document.getElementById("mdp").value;
                     var cmdp = document.getElementById("cmdp").value;
                     var datenaissance = document.getElementById("datepicker").value;
+                    var description = document.getElementById("description").value;
                     
-                    if(nom=="" || prenoms=="" || email=="" || mdp=="" || cmdp=="" || datenaissance=="")
+                    if(nom=="" || prenoms=="" || email=="" || mdp=="" || cmdp=="" || datenaissance=="" || description=="")
                     {
                         $("#erreur").empty();
                         var erreur = document.getElementById("erreur");
@@ -191,7 +196,7 @@
                             var erreur = document.getElementById("erreur");
                             erreur.setAttribute("class","alert-danger");
                             var p = document.createElement("P");
-                            $(p).prepend('Le mot de passe doit contenir au moins 1 majuscule');
+                            $(p).prepend('Le mot de passe doit contenir au moins une majuscule');
                             $(erreur).append(p);
                         }  
                         else if (chiffreRegex.test($(this).val()) === false) 
@@ -200,7 +205,7 @@
                             var erreur = document.getElementById("erreur");
                             erreur.setAttribute("class","alert-danger");
                             var p = document.createElement("P");
-                            $(p).prepend('Le mot de passe doit contenir au moins 1 chiffre');
+                            $(p).prepend('Le mot de passe doit contenir au moins un chiffre');
                             $(erreur).append(p);
                         }  
                         else if (specRegex.test($(this).val()) === false) 
@@ -209,7 +214,7 @@
                             var erreur = document.getElementById("erreur");
                             erreur.setAttribute("class","alert-danger");
                             var p = document.createElement("P");
-                            $(p).prepend('Le mot de passe doit contenir au moins 1 caractere special');
+                            $(p).prepend('Le mot de passe doit contenir au moins un caractere special');
                             $(erreur).append(p);
                         }  
                         else
