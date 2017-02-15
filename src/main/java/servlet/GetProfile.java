@@ -24,17 +24,11 @@ public class GetProfile extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
         PrintWriter out = response.getWriter();
         response.setContentType("application/json;charset=UTF-8");
         
         response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Methods", "POST, GET");
+        response.addHeader("Access-Control-Allow-Methods", "GET");
         response.addHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
         response.addHeader("Access-Control-Max-Age", "86400");
         try 
@@ -52,6 +46,12 @@ public class GetProfile extends HttpServlet
             String erreur = "-1";
             out.print(erreur);
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        
     }
 
 }
