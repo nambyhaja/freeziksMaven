@@ -33,6 +33,12 @@ public class GetAllMusique extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
+        response.setContentType("application/json;charset=UTF-8");
+        
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Methods", "POST, GET");
+        response.addHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+        response.addHeader("Access-Control-Max-Age", "86400");
         try 
         {
             Musique[] musiques = Operations.findAllMusique();
