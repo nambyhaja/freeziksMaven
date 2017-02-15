@@ -32,6 +32,18 @@
         <servlet-name>GetAllMusique</servlet-name>
         <servlet-class>servlet.GetAllMusique</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NewServlet</servlet-name>
+        <servlet-class>servlet.NewServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetProfile</servlet-name>
+        <servlet-class>servlet.GetProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetMusiqueRecent</servlet-name>
+        <servlet-class>servlet.GetMusiqueRecent</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Connexion</servlet-name>
         <url-pattern>/Connexion</url-pattern>
@@ -63,6 +75,18 @@
     <servlet-mapping>
         <servlet-name>GetAllMusique</servlet-name>
         <url-pattern>/GetAllMusique</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewServlet</servlet-name>
+        <url-pattern>/NewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetProfile</servlet-name>
+        <url-pattern>/GetProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetMusiqueRecent</servlet-name>
+        <url-pattern>/GetMusiqueRecent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
