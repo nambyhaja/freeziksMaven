@@ -49,7 +49,7 @@ public class GetProfile extends HttpServlet
         }
         catch(Exception ex)
         {
-            String erreur = "Email ou mot de passe invalide";
+            String erreur = "-1";
             out.print(erreur);
         }
     }
