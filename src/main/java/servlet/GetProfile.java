@@ -38,7 +38,11 @@ public class GetProfile extends HttpServlet
             Utilisateur utilisateur = Operations.findUtilisateur(email, password);
             
             Gson json = new Gson();
-            String user = json.toJson(utilisateur);
+            
+            Utilisateur[] users = new Utilisateur[1];
+            users[0]=utilisateur;
+            
+            String user = json.toJson(users);
             out.print(user);
         }
         catch(Exception ex)
