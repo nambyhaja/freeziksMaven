@@ -53,6 +53,7 @@ public class OperationsTest {
                 "michael.ratefinjanahary@gmail.com", "prodigy", "J'aime la musique");
         Utilisateur result = Operations.findUtilisateur(email, motdepasse);
         assertEquals(expResult.getIdUtilisateur(), result.getIdUtilisateur());
+        System.out.println("TestFindUtilisateur passed");
     }
 
     /**
@@ -64,6 +65,7 @@ public class OperationsTest {
         Musique[] expResult = new Musique[15];
         Musique[] result = Operations.findAllMusique();
         assertEquals(expResult.length, result.length);
+        System.out.println("TestFindAllMusique passed");
     }
 
     /**
@@ -76,6 +78,7 @@ public class OperationsTest {
         Musique[] expResult = new Musique[5];
         Musique[] result = Operations.findMusique(idUtilisateur);
         assertEquals(expResult.length, result.length);
+        System.out.println("TestFindMusique passed");
     }
 
     /**
@@ -87,6 +90,7 @@ public class OperationsTest {
         Musique[] expResult = new Musique[7];
         Musique[] result = Operations.findMusiquesRecents();
         assertEquals(expResult.length, result.length);
+        System.out.println("TestMusiqueRecents passed");
     }
 
     /**
@@ -98,5 +102,6 @@ public class OperationsTest {
         Musique[] expResult = new Musique[3];
         Musique[] result = Operations.findMusiquesTopSemaine();
         assertEquals(expResult.length, result.length);
+        System.out.println("TestFindMusiquesTopSemaine passed");
     }
 }
